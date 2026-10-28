@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Leadflow | Mini CRM</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <section id="login" class="login-screen">
+    <div class="login-card">
+      <div class="brand-mark">↗</div><p class="eyebrow">YOUR CLIENT WORKSPACE</p><h1>Welcome back.</h1>
+      <p class="muted">Sign in to manage your leads, conversations and follow-ups.</p>
+      <form id="loginForm"><label for="username">Username</label><input id="username" required value="admin" autocomplete="username"><label for="password">Password</label><input id="password" type="password" required autocomplete="current-password"><button class="primary full">Sign in to workspace</button><p id="loginMsg" class="msg"></p></form>
+      <small class="muted">Demo login: admin / ChangeMe123!</small>
+    </div>
+  </section>
+
+  <div id="appShell" class="app-shell hidden">
+    <aside class="sidebar">
+      <a class="brand" href="#"><span class="brand-mark">↗</span><span>leadflow<span class="brand-dot">.</span></span></a>
+      <div class="workspace-card"><div class="avatar">A</div><div><b>Demo workspace</b><small>Client relationships</small></div><span class="shield">✓</span></div>
+      <p class="nav-label">WORKSPACE</p>
+      <nav class="nav"><button class="nav-item active" data-view="overview"><span>▦</span>Overview</button><button class="nav-item" data-view="leadsView"><span>♧</span>All leads <b id="navLeadCount">0</b></button><button class="nav-item" data-view="followView"><span>▦</span>Follow-ups <b id="navFollowCount" class="nav-count">0</b></button></nav>
+      <div class="sidebar-promo"><div class="promo-icon">✉</div><h3>From hello to opportunity.</h3><p>Capture enquiries and bring every conversation into your pipeline.</p><button id="sidebarAdd" class="outline-button">＋ Add a lead</button></div>
+      <div class="sidebar-bottom"><span class="status-dot"></span> Local CRM workspace <button id="logout" class="logout-link">Log out</button></div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar"><div class="breadcrumbs">Workspace <span>›</span> <b id="breadcrumb">Overview</b></div><div class="topbar-right"><span id="todayLabel">Today</span><div class="avatar avatar-top">A</div></div></header>
+      <div class="content-area">
+        <div class="demo-banner"><div><b>Private workspace</b><p>Your leads are saved in your local MongoDB database.</p></div><span class="banner-icon">✓</span></div>
+        <section id="overview" class="view-section">
+          <div class="page-heading"><div><p class="eyebrow">YOUR RELATIONSHIPS, IN FOCUS</p><h1>A little follow-up. A lot of possibility.</h1><p class="muted">A clear view of your leads and what comes next.</p></div><button id="add" class="primary add-button">＋ Add lead</button></div>
+          <div class="stats-grid">
+            <article class="stat-card"><div class="stat-top"><span>Total leads</span><span class="stat-icon lilac">♧</span></div><strong id="total">0</strong><small>Every opportunity starts here</small></article>
+            <article class="stat-card"><div class="stat-top"><span>New leads</span><span class="stat-icon blue">▱</span></div><strong id="new">0</strong><small>Ready for a first hello</small></article>
+            <article class="stat-card"><div class="stat-top"><span>Contacted</span><span class="stat-icon orange">▢</span></div><strong id="contacted">0</strong><small>Conversations in progress</small></article>
+            <article class="stat-card"><div class="stat-top"><span>Converted</span><span class="stat-icon green">✓</span></div><strong id="converted">0</strong><small>Relationships turned into wins</small></article>
+          </div>
+          <div class="overview-panels"><article class="panel pipeline-panel"><div class="panel-heading"><h2>Your pipeline</h2><span>From introduction to conversion</span></div><div id="pipelineBar" class="pipeline-bar"><span class="pipe-new"></span><span class="pipe-contacted"></span><span class="pipe-converted"></span></div><div class="pipeline-legend"><span><i class="dot dot-new"></i>New <b id="pipeNew">0</b></span><span><i class="dot dot-contacted"></i>Contacted <b id="pipeContacted">0</b></span><span><i class="dot dot-converted"></i>Converted <b id="pipeConverted">0</b></span></div></article>
+            <button id="followCard" class="follow-panel"><span class="follow-icon">▦</span><span class="follow-copy"><b id="followHeadline">No follow-ups pending</b><small id="followSub">You're all caught up for now.</small></span><span class="follow-arrow">↗</span></button></div>
+          <section class="leads-section panel"><div class="section-heading"><div><h2>Recent leads <span class="count-pill" id="recentCount">0</span></h2><p class="muted">Keep track of your latest conversations.</p></div><button class="text-button" data-goto="leadsView">View all leads ↗</button></div><div id="recentLeads" class="recent-list"></div></section>
+        </section>
+        <section id="leadsView" class="view-section hidden"><div class="page-heading"><div><p class="eyebrow">YOUR CONTACTS</p><h1>All leads</h1><p class="muted">Every enquiry, in one place.</p></div><button id="addFromList" class="primary add-button">＋ Add lead</button></div><div class="panel leads-section"><div class="toolbar"><input id="search" placeholder="⌕  Search name, email or source..."><select id="filter"><option value="all">All statuses</option><option value="new">New</option><option value="contacted">Contacted</option><option value="converted">Converted</option></select></div><p id="notice" class="msg"></p><div id="leads" class="lead-list"></div></div></section>
+        <section id="followView" class="view-section hidden"><div class="page-heading"><div><p class="eyebrow">STAY IN THE LOOP</p><h1>Follow-ups</h1><p class="muted">A small check-in can move things forward.</p></div><button id="addFromFollow" class="primary add-button">＋ Add lead</button></div><div class="panel leads-section"><div class="section-heading"><div><h2>Leads needing attention</h2><p class="muted">Scheduled follow-ups, ordered by date.</p></div></div><div id="followLeads" class="lead-list"></div></div></section>
+      </div>
+    </main>
+  </div>
+
+  <dialog id="dialog"><form id="leadForm"><div class="dialog-heading"><div><p class="eyebrow">LEAD DETAILS</p><h2 id="formTitle">Add a lead</h2></div><button type="button" id="close" class="close-button" aria-label="Close">×</button></div><input type="hidden" id="id"><label for="name">Full name *</label><input id="name" required maxlength="100" placeholder="e.g. Alex Johnson"><label for="email">Email *</label><input id="email" type="email" required maxlength="150" placeholder="alex@example.com"><label for="source">Source</label><input id="source" value="Website contact form"><label for="status">Status</label><select id="status"><option value="new">New</option><option value="contacted">Contacted</option><option value="converted">Converted</option></select><label for="followUp">Follow-up date</label><input id="followUp" type="date"><label for="notes">Notes</label><textarea id="notes" rows="3" maxlength="2000" placeholder="Add context, conversation notes or next steps..."></textarea><p id="formMsg" class="msg"></p><div class="actions"><button type="button" id="cancel" class="secondary">Cancel</button><button class="primary">Save lead</button></div></form></dialog>
+  <script src="app.js"></script>
+</body></html>
