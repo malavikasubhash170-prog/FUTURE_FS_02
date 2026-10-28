@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leadflow | CRM Demo</title>
+<link rel="stylesheet" href="public/style.css">
+<style>
+.demo-label{margin:12px 0;padding:12px 16px;border-radius:10px;background:#f0eaff;color:#6547cf;font-size:14px}
+.demo-label b{display:block;margin-bottom:4px}
+.demo-label small{color:#7865a8}
+</style>
+</head>
+<body>
+<div class="app-shell">
+<aside class="sidebar">
+<a class="brand" href="#"><span class="brand-mark">↗</span><span>leadflow<span class="brand-dot">.</span></span></a>
+<div class="workspace-card"><div class="avatar">A</div><div><b>Demo workspace</b><small>Client relationships</small></div><span class="shield">✓</span></div>
+<p class="nav-label">WORKSPACE</p>
+<nav class="nav">
+<button class="nav-item active" data-view="overview"><span>▦</span>Overview</button>
+<button class="nav-item" data-view="leadsView"><span>♧</span>All leads <b id="navLeadCount">5</b></button>
+<button class="nav-item" data-view="followView"><span>▦</span>Follow-ups <b class="nav-count">2</b></button>
+</nav>
+<div class="sidebar-promo"><div class="promo-icon">✉</div><h3>From hello to opportunity.</h3><p>Capture enquiries and bring every conversation into your pipeline.</p><button class="outline-button" onclick="demoMessage()">＋ Add a lead</button></div>
+<div class="sidebar-bottom"><span class="status-dot"></span> Portfolio demo <span style="margin-left:auto">Demo</span></div>
+</aside>
+<main class="main-area">
+<header class="topbar"><div class="breadcrumbs">Workspace <span>›</span> <b id="breadcrumb">Overview</b></div><div class="topbar-right"><span>Live Demo</span><div class="avatar avatar-top">A</div></div></header>
+<div class="content-area">
+<div class="demo-label"><b>Interactive portfolio demo</b><small>Sample leads are displayed. Changes are not saved to a database.</small></div>
+<section id="overview" class="view-section">
+<div class="page-heading"><div><p class="eyebrow">YOUR RELATIONSHIPS, IN FOCUS</p><h1>A little follow-up. A lot of possibility.</h1><p class="muted">A clear view of your leads and what comes next.</p></div><button class="primary add-button" onclick="demoMessage()">＋ Add lead</button></div>
+<div class="stats-grid">
+<article class="stat-card"><div class="stat-top"><span>Total leads</span><span class="stat-icon lilac">♧</span></div><strong>5</strong><small>Every opportunity starts here</small></article>
+<article class="stat-card"><div class="stat-top"><span>New leads</span><span class="stat-icon blue">▱</span></div><strong>3</strong><small>Ready for a first hello</small></article>
+<article class="stat-card"><div class="stat-top"><span>Contacted</span><span class="stat-icon orange">▢</span></div><strong>2</strong><small>Conversations in progress</small></article>
+<article class="stat-card"><div class="stat-top"><span>Converted</span><span class="stat-icon green">✓</span></div><strong>0</strong><small>Relationships turned into wins</small></article>
+</div>
+<div class="overview-panels">
+<article class="panel pipeline-panel"><div class="panel-heading"><h2>Your pipeline</h2><span>From introduction to conversion</span></div><div class="pipeline-bar"><span class="pipe-new" style="width:60%"></span><span class="pipe-contacted" style="width:40%"></span><span class="pipe-converted" style="width:0%"></span></div><div class="pipeline-legend"><span><i class="dot dot-new"></i>New <b>3</b></span><span><i class="dot dot-contacted"></i>Contacted <b>2</b></span><span><i class="dot dot-converted"></i>Converted <b>0</b></span></div></article>
+<button class="follow-panel" onclick="showView('followView')"><span class="follow-icon">▦</span><span class="follow-copy"><b>2 follow-ups need attention</b><small>A small check-in can move things forward.</small></span><span class="follow-arrow">↗</span></button>
+</div>
+<section class="leads-section panel"><div class="section-heading"><div><h2>Recent leads <span class="count-pill">5</span></h2><p class="muted">Keep track of your latest conversations.</p></div><button class="text-button" onclick="showView('leadsView')">View all leads ↗</button></div><div id="recentLeads" class="recent-list"></div></section>
+</section>
+<section id="leadsView" class="view-section hidden"><div class="page-heading"><div><p class="eyebrow">YOUR CONTACTS</p><h1>All leads</h1><p class="muted">Every enquiry, in one place.</p></div></div><div class="panel leads-section"><div class="toolbar"><input id="search" placeholder="Search name, email or source..."><select id="filter"><option value="all">All statuses</option><option value="new">New</option><option value="contacted">Contacted</option><option value="converted">Converted</option></select></div><div id="leads" class="lead-list"></div></div></section>
+<section id="followView" class="view-section hidden"><div class="page-heading"><div><p class="eyebrow">STAY IN THE LOOP</p><h1>Follow-ups</h1><p class="muted">A small check-in can move things forward.</p></div></div><div class="panel leads-section"><div class="section-heading"><div><h2>Leads needing attention</h2><p class="muted">Sample follow-ups for this demo.</p></div></div><div id="followLeads" class="lead-list"></div></div></section>
+</div>
+</main>
+</div>
+<script>
+const sampleLeads=[
+{name:"Adithya Krishnan",email:"adithya.krishnan@example.com",source:"Website contact form",status:"new",followUp:"2026-10-28",notes:"Asked about the service."},
+{name:"Ananya Menon",email:"ananya.menon@example.com",source:"Referral",status:"contacted",followUp:"2026-10-28",notes:"Follow up after the first conversation."},
+{name:"Rahul Nair",email:"rahul.nair@example.com",source:"Website contact form",status:"new",followUp:"2026-10-29",notes:"Interested in learning more."},
+{name:"Meera Joseph",email:"meera.joseph@example.com",source:"LinkedIn",status:"contacted",followUp:"2026-10-27",notes:"Sent an introductory email."},
+{name:"Arjun Das",email:"arjun.das@example.com",source:"Campaign",status:"new",followUp:"2026-10-30",notes:"New enquiry."}
+];
+const esc=s=>String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const date=s=>s?new Date(s+"T00:00:00").toLocaleDateString(undefined,{day:"numeric",month:"short",year:"numeric"}):"Not scheduled";
+function card(l){return `<article class="lead"><div class="leadtop"><div><h3>${esc(l.name)}</h3><a href="mailto:${encodeURIComponent(l.email)}">${esc(l.email)}</a></div><span class="badge ${esc(l.status)}">${esc(l.status)}</span></div><div class="mutedline">Source: ${esc(l.source)} · Follow-up: ${date(l.followUp)}</div><p class="notes">${esc(l.notes)}</p><div class="leadbuttons"><button class="secondary" onclick="demoMessage()">View details</button></div></article>`}
+function render(){
+document.getElementById("recentLeads").innerHTML=sampleLeads.slice(0,5).map(l=>`<div class="recent-row"><div class="contact-avatar">${esc(l.name.split(" ").map(x=>x[0]).slice(0,2).join(""))}</div><div class="recent-info"><b>${esc(l.name)}</b><small>${esc(l.email)} · ${esc(l.source)}</small></div><span class="badge ${esc(l.status)}">${esc(l.status)}</span></div>`).join("");
+const q=(document.getElementById("search")?.value||"").toLowerCase(),f=document.getElementById("filter")?.value||"all";
+const list=sampleLeads.filter(l=>(f==="all"||l.status===f)&&`${l.name} ${l.email} ${l.source}`.toLowerCase().includes(q));
+document.getElementById("leads").innerHTML=list.map(card).join("")||"<p>No matching leads.</p>";
+document.getElementById("followLeads").innerHTML=sampleLeads.filter(l=>l.followUp<="2026-10-28").map(card).join("")||"<p>No follow-ups.</p>";
+}
+function showView(id){document.querySelectorAll(".view-section").forEach(x=>x.classList.add("hidden"));document.getElementById(id).classList.remove("hidden");document.querySelectorAll(".nav-item").forEach(b=>b.classList.toggle("active",b.dataset.view===id));document.getElementById("breadcrumb").textContent=id==="overview"?"Overview":id==="leadsView"?"All leads":"Follow-ups";if(id==="leadsView")render();}
+function demoMessage(){alert("This is a portfolio demo with sample data. The live database features are available in the full local application.");}
+document.querySelectorAll(".nav-item").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view)));
+document.getElementById("search").addEventListener("input",render);
+document.getElementById("filter").addEventListener("change",render);
+document.getElementById("todayLabel")?.textContent;
+render();
+</script>
+</body>
+</html>
