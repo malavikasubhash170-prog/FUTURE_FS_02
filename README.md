@@ -2,6 +2,10 @@
 
 A beginner-friendly CRM for Future Interns Task 2.
 
+## Live Project
+
+👉 [Open the Live Project](https://malavikasubhash170-prog.github.io/FUTURE_FS_02/)
+
 ## Features
 - Admin login
 - Lead list with name, email, source and status
