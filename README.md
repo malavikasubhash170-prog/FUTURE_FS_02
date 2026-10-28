@@ -2,6 +2,10 @@
 
 A beginner-friendly CRM for Future Interns Task 2.
 
+## Live Project
+
+👉 [Open the Live Project](https://malavikasubhash170-prog.github.io/FUTURE_FS_02/)
+
 ## Features
 - Admin login
 - Lead list with name, email, source and status
@@ -26,3 +30,12 @@ Change the demo password and session secret before sharing. Never upload `.env` 
 
 ## API
 POST `/api/login`, POST `/api/logout`, GET `/api/session`, GET/POST `/api/leads`, PATCH/DELETE `/api/leads/:id`.
+
+
+## Author
+
+**Malavika Subhash**
+
+GitHub: https://github.com/malavikasubhash170-prog
+
+LinkedIn:https://www.linkedin.com/in/malavika-subhash/
