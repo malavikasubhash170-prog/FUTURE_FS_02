@@ -26,3 +26,12 @@ Change the demo password and session secret before sharing. Never upload `.env` 
 
 ## API
 POST `/api/login`, POST `/api/logout`, GET `/api/session`, GET/POST `/api/leads`, PATCH/DELETE `/api/leads/:id`.
+
+
+## Author
+
+**Malavika Subhash**
+
+GitHub: https://github.com/malavikasubhash170-prog
+
+LinkedIn:https://www.linkedin.com/in/malavika-subhash/
